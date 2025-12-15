@@ -288,6 +288,15 @@
             box-shadow: none;
             padding: 0;
         }
+        /* MOBİLDE TEST BAŞLIĞINI KÜÇÜLTME */
+        #quiz-title {
+            font-size: 0.85rem !important; /* Yazı boyutunu küçült */
+            font-weight: 700 !important;   /* Kalınlığı biraz azalt */
+            max-width: 50%;                /* Genişliği sınırla ki taşmasın */
+            white-space: nowrap;           /* Alt satıra geçmesini engelle */
+            overflow: hidden;              /* Taşarsa gizle */
+            text-overflow: ellipsis;       /* Sığmazsa ... koysun */
+        }
     }
         /* --- MOBİL İÇİN ÖZEL AYARLAR --- */
         
@@ -1514,6 +1523,7 @@
 </script>
 </body>
 </html>
+
 
 
 
