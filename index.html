@@ -89,9 +89,8 @@
         }
         .logout-link { color: var(--danger); cursor: pointer; font-weight: 600; }
 
-        /* --- QUIZ ALANI YENİ DÜZEN (3 SATIR) --- */
+        /* --- QUIZ ALANI --- */
         
-        /* Satır 1: Çıkış ve Kullanıcı */
         .quiz-row-1 {
             display: flex;
             justify-content: space-between;
@@ -103,14 +102,10 @@
             background: #eff6ff; padding: 5px 12px; border-radius: 15px;
         }
 
-        /* Satır 2: Progress Bar */
-        .quiz-row-2 {
-            margin-bottom: 15px;
-        }
+        .quiz-row-2 { margin-bottom: 15px; }
         .progress-container { width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
 
-        /* Satır 3: Meta (Soru No ve Switch) */
         .quiz-row-3 {
             display: flex;
             justify-content: space-between;
@@ -121,7 +116,6 @@
         }
         .question-counter { font-weight: 700; color: var(--secondary); font-size: 1rem; }
 
-        /* Soru ve Şıklar */
         .question-text { font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 25px; line-height: 1.5; }
         
         .option-card {
@@ -134,13 +128,11 @@
         .option-card.incorrect { background: #fee2e2; border-color: var(--danger); color: #7f1d1d; }
         .option-card.hint { border-color: var(--success); background: #f0fdf4; color: var(--success); font-weight: 600; }
 
-        /* NAVIGASYON */
         .nav-buttons { display: flex; justify-content: space-between; margin-top: 25px; gap: 15px; }
         .nav-btn { flex: 1; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; font-size: 1rem; }
         .btn-prev { background: #e2e8f0; color: #475569; }
         .btn-next { background: var(--primary-dark); color: white; }
 
-        /* HIZLI ERİŞİM GRID */
         .fast-access-container { margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; }
         .fast-access-title { text-align: center; font-size: 0.85rem; color: var(--secondary); margin-bottom: 10px; }
         .access-grid {
@@ -157,7 +149,6 @@
         .access-btn.correct { background: var(--success); color: white; border-color: var(--success); }
         .access-btn.incorrect { background: var(--danger); color: white; border-color: var(--danger); }
 
-        /* SWITCH TOGGLE */
         .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
         .switch input { display:none; }
         .slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background-color: #cbd5e1; transition:.3s; border-radius: 34px; }
@@ -166,21 +157,20 @@
         input:checked + .slider:before { transform: translateX(20px); }
         .switch-label { font-size: 0.9rem; color: var(--secondary); font-weight: 600; margin-right: 10px; }
 
-        /* --- SONUÇ EKRANI YENİ TASARIM --- */
+        /* SONUÇ EKRANI */
         .score-circle {
             width: 150px; height: 150px; border-radius: 50%;
-            background: transparent; /* İçi boş */
+            background: transparent;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             margin: 0 auto 20px; font-size: 2.2rem; font-weight: 800;
             color: var(--text-main);
-            border: 10px solid #e2e8f0; /* Varsayılan */
+            border: 10px solid #e2e8f0;
         }
         .score-circle.good { border-color: var(--success); color: var(--success); }
         .score-circle.bad { border-color: var(--danger); color: var(--danger); }
         
         .score-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #64748b; margin-top: 5px; }
 
-        /* Scrollbar */
         .access-grid::-webkit-scrollbar { width: 6px; }
         .access-grid::-webkit-scrollbar-track { background: #f1f1f1; }
         .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
@@ -300,24 +290,30 @@
 </div>
 
 <script>
-    // --- 1. VERİ HAVUZLARI ---
+    /* --- 1. VERİ HAVUZLARI --- */
     
-    // Örnek Veri (Önceki 190 soruyu buraya yapıştırın, kod uzunluğu için kısaltıldı)
+    // TEMEL SORULAR (102 Adet)
     const basicQuestions = [
         { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
         { q: "Devlet hava araçları nelerdir?", options: ["Askerî, gümrük, polis", "Yolcu, kargo, eğitim", "Tarım, balon, planör", "Helikopter, jet, planör"], answer: "Askerî, gümrük, polis" },
         { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" }
+        // ... (Buraya diğer tüm 102 sorunuzu ekleyin)
     ];
     
+    // ÇIKMIŞ SORULAR (48 Adet)
     const pastQuestions = [
         { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
         { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" }
+        // ... (Buraya diğer çıkmış sorularınızı ekleyin)
     ];
 
+    // AI SORULARI (40 Adet)
     const aiQuestions = [
         { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler?", options: ["Hava Trafik", "Güvenlik (Security)", "Çevre", "Arama Kurtarma"], answer: "Güvenlik (Security)" }
+        // ... (Buraya diğer AI sorularınızı ekleyin)
     ];
 
+    // AOF Soruları
     const aofData = {
         deneme1: [ { q: "AOF Deneme 1 Soru 1?", options: ["A", "B", "C", "D"], answer: "A" } ],
         deneme2: [ { q: "AOF Deneme 2 Soru 1?", options: ["X", "Y", "Z", "Q"], answer: "X" } ],
@@ -325,14 +321,14 @@
         final2: [ { q: "AOF Final 2 Soru 1?", options: ["Evet", "Hayır"], answer: "Evet" } ]
     };
 
-    // --- 2. UYGULAMA MANTIĞI ---
+    /* --- 2. SİSTEM MANTIĞI --- */
 
     let currentUser = null;
     let currentPool = [];
     let currentIndex = 0;
     let userAnswers = []; 
 
-    // Başlangıç
+    // Başlangıç ve Enter Tuşu
     window.onload = function() {
         const savedUser = localStorage.getItem('havacilik_user');
         if (savedUser) {
@@ -343,13 +339,16 @@
         } else {
             showPage('page-login');
         }
+
+        document.getElementById("username-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") login();
+        });
     };
 
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         
-        // Header Yönetimi
         const infoPanel = document.getElementById('user-info-panel');
         if (id === 'page-menu' || id === 'page-aof' || id === 'page-result') {
             infoPanel.style.display = 'flex';
@@ -387,7 +386,7 @@
     function getDB() { return JSON.parse(localStorage.getItem('havacilik_db_v3') || '{}'); }
     function saveDB(data) { localStorage.setItem('havacilik_db_v3', JSON.stringify(data)); }
 
-    // Hata İstatistiği Güncelleme
+    // Hata İstatistiği
     function updateStats(question, isCorrect) {
         let db = getDB();
         if(!db[currentUser]) db[currentUser] = { stats: {} };
@@ -400,6 +399,7 @@
         let stat = db[currentUser].stats[key];
         stat.total++;
         if(isCorrect) stat.correct++; else stat.wrong++;
+        // Nesne güncelliği için
         stat.qObj = question;
         
         saveDB(db);
@@ -429,40 +429,57 @@
         if(critical.length===0 && warning.length===0 && info.length===0) container.innerHTML = '<span style="color:#94a3b8;">Henüz hata kaydı yok.</span>';
     }
 
-    // Quiz Başlatma
+    // Quiz Başlatma (ŞIK KARIŞTIRMA ÖZELLİĞİ EKLENDİ)
     function startQuiz(type) {
-        currentPool = [];
-        if(type === 'temel') currentPool = [...basicQuestions];
-        else if(type === 'cikmis') currentPool = [...pastQuestions];
-        else if(type === 'ai') currentPool = [...aiQuestions];
-        else if(type === 'mix') currentPool = [...basicQuestions, ...pastQuestions, ...aiQuestions];
-        else if(type === 'aof_deneme1') currentPool = [...aofData.deneme1];
-        else if(type === 'aof_deneme2') currentPool = [...aofData.deneme2];
-        else if(type === 'aof_final1') currentPool = [...aofData.final1];
-        else if(type === 'aof_final2') currentPool = [...aofData.final2];
-        else if(type === 'aof_mix') currentPool = [...aofData.deneme1, ...aofData.deneme2, ...aofData.final1, ...aofData.final2];
+        let sourceData = [];
+        if (type === 'temel') sourceData = basicQuestions;
+        else if (type === 'cikmis') sourceData = pastQuestions;
+        else if (type === 'ai') sourceData = aiQuestions;
+        else if (type === 'mix') sourceData = [...basicQuestions, ...pastQuestions, ...aiQuestions];
+        else if (type === 'aof_deneme1') sourceData = aofData.deneme1;
+        else if (type === 'aof_deneme2') sourceData = aofData.deneme2;
+        else if (type === 'aof_final1') sourceData = aofData.final1;
+        else if (type === 'aof_final2') sourceData = aofData.final2;
+        else if (type === 'aof_mix') sourceData = [...aofData.deneme1, ...aofData.deneme2, ...aofData.final1, ...aofData.final2];
 
-        if(currentPool.length === 0) return alert("Soru bulunamadı.");
+        if (!sourceData || sourceData.length === 0) return alert("Soru bulunamadı.");
         
+        // Havuzu oluştururken hem soruları hem şıkları kopyalayıp karıştırıyoruz
+        currentPool = sourceData.map(q => {
+            // Sorunun kopyasını oluştur
+            let newQ = { ...q };
+            // Şıkları kopyala ve karıştır
+            newQ.options = [...q.options].sort(() => Math.random() - 0.5);
+            return newQ;
+        });
+
+        // Soruların sırasını karıştır
         currentPool.sort(() => Math.random() - 0.5);
+        
         initQuizUI();
     }
 
     function startMistakeQuiz(cat) {
         let db = getDB();
         let stats = db[currentUser].stats;
-        let pool = [];
+        let sourceData = [];
         
         Object.values(stats).forEach(item => {
             if(item.wrong > 0) {
                 let rate = (item.correct / item.total) * 100;
-                if(cat === 'critical' && rate < 50) pool.push(item.qObj);
-                if(cat === 'warning' && rate >= 50 && rate < 80) pool.push(item.qObj);
-                if(cat === 'info' && rate >= 80) pool.push(item.qObj);
+                if(cat === 'critical' && rate < 50) sourceData.push(item.qObj);
+                if(cat === 'warning' && rate >= 50 && rate < 80) sourceData.push(item.qObj);
+                if(cat === 'info' && rate >= 80) sourceData.push(item.qObj);
             }
         });
         
-        currentPool = pool;
+        // Hatalı sorularda da şıkları karıştır
+        currentPool = sourceData.map(q => {
+            let newQ = { ...q };
+            newQ.options = [...q.options].sort(() => Math.random() - 0.5);
+            return newQ;
+        });
+
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
@@ -494,7 +511,6 @@
 
         if(userAnswers[currentIndex]) restoreState();
         
-        // Navigasyon Buton Durumları
         document.getElementById('btn-prev').disabled = (currentIndex === 0);
         document.getElementById('btn-next').textContent = (currentIndex === currentPool.length - 1) ? 'Bitir' : 'Sonraki →';
         
@@ -513,11 +529,10 @@
         applyFeedback();
         renderFastAccess();
 
-        // OTOMATİK GEÇİŞ MANTIĞI
+        // OTOMATİK GEÇİŞ
         const autoNext = document.getElementById('auto-next').checked;
         
         if(isCorrect && autoNext) {
-            // Şıklara tıklamayı engelle
             const allOpts = document.querySelectorAll('.option-card');
             allOpts.forEach(o => o.style.pointerEvents = 'none');
             
@@ -525,9 +540,8 @@
             if (currentIndex < currentPool.length - 1) {
                 setTimeout(() => {
                     nextQuestion();
-                }, 700);
+                }, 400); // 0.4 saniye
             }
-            // Son soruysa HİÇBİR ŞEY YAPMA (Kullanıcı manuel bitirsin)
         }
     }
 
@@ -601,16 +615,16 @@
         
         document.getElementById('res-score').textContent = `%${score}`;
         
-        // Sonuç Çemberi Renklendirme
+        // Sonuç Çemberi (75 ve üzeri yeşil)
         const circle = document.getElementById('result-circle');
-        circle.className = 'score-circle'; // Reset
-        if(score > 75) circle.classList.add('good');
+        circle.className = 'score-circle'; 
+        if(score >= 75) circle.classList.add('good');
         else circle.classList.add('bad');
 
         const msg = document.getElementById('res-msg');
         if(score >= 90) msg.textContent = "Mükemmel! 🚀";
-        else if(score >= 70) msg.textContent = "Güzel! 👍";
-        else msg.textContent = "Geliştirilmeli. 🧐";
+        else if(score >= 75) msg.textContent = "Tebrikler, Geçtiniz! 👍";
+        else msg.textContent = "Tekrar Gerekli. 🧐";
 
         const wrongOnes = userAnswers.filter(a => a && !a.isCorrect);
         const retryBtn = document.getElementById('btn-retry-session');
@@ -626,13 +640,26 @@
     }
 
     function restartQuiz() {
+        // Yeniden başlatırken de şıkları tekrar karıştır
+        currentPool = currentPool.map(q => {
+            let newQ = { ...q };
+            newQ.options = [...q.options].sort(() => Math.random() - 0.5);
+            return newQ;
+        });
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
 
     function retrySessionMistakes() {
         const wrongs = userAnswers.filter(a => !a.isCorrect).map(a => a.qObj);
-        currentPool = wrongs;
+        
+        // Hatalı sorularda da şıkları karıştır
+        currentPool = wrongs.map(q => {
+            let newQ = { ...q };
+            newQ.options = [...q.options].sort(() => Math.random() - 0.5);
+            return newQ;
+        });
+
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
