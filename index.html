@@ -37,7 +37,7 @@
             background: var(--card);
             width: 100%;
             max-width: 900px;
-            min-height: 750px;
+            min-height: 780px;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -79,7 +79,7 @@
 
         .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
 
-        /* HEADER & USER (Global) */
+        /* HEADER & USER */
         .user-header {
             position: absolute; top: 20px; right: 20px; z-index: 10;
             display: flex; align-items: center; gap: 15px;
@@ -88,6 +88,33 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .logout-link { color: var(--danger); cursor: pointer; font-weight: 600; }
+
+        /* --- ANA MENÜ HATA ANALİZ KARTI --- */
+        .stats-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 15px;
+        }
+        .stats-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
+        }
+        .stats-title { font-size: 0.95rem; color: var(--text-main); font-weight: 700; text-transform: uppercase; }
+        
+        /* Sekmeler (Tabs) */
+        .stats-tabs {
+            display: flex; gap: 5px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px;
+        }
+        .stat-tab {
+            padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+            border: 1px solid var(--border); background: white; color: var(--secondary); white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .stat-tab.active {
+            background: var(--primary); color: white; border-color: var(--primary);
+        }
+        .stat-tab:hover:not(.active) { background: #e2e8f0; }
 
         /* --- QUIZ ALANI --- */
         .quiz-row-1 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -100,14 +127,7 @@
         .quiz-row-3 { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
         .question-counter { font-weight: 700; color: var(--secondary); font-size: 1rem; }
 
-        /* Soru Metni: Satır aralığı artırıldı, pre-line eklendi */
-        .question-text { 
-            font-size: 1.3rem; 
-            font-weight: 700; 
-            color: var(--text-main); 
-            margin-bottom: 25px; 
-            line-height: 1.6; 
-        }
+        .question-text { font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 25px; line-height: 1.6; }
         
         .option-card {
             padding: 18px; border: 2px solid var(--border); border-radius: 10px;
@@ -154,13 +174,6 @@
         .score-circle.bad { border-color: var(--danger); color: var(--danger); }
         .score-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #64748b; margin-top: 5px; }
 
-        .mistake-cat { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
-        .mistake-cat:hover { transform: translateX(5px); }
-        .cat-critical { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
-        .cat-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
-        .cat-info { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
-        .cat-badge { font-weight: bold; padding: 4px 8px; border-radius: 12px; background: rgba(255,255,255,0.6); font-size: 0.8rem; }
-
         .access-grid::-webkit-scrollbar { width: 6px; }
         .access-grid::-webkit-scrollbar-track { background: #f1f1f1; }
         .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
@@ -193,12 +206,24 @@
         </div>
         <button class="btn btn-primary" style="margin-bottom: 20px;" onclick="showPage('page-aof')">📚 AOF Modülü (Deneme/Final)</button>
         
-        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px;">
-            <h4 style="margin:0 0 10px 0; font-size:0.9rem; color:var(--secondary);">HATA ANALİZİ</h4>
-            <div id="mistake-stats" style="display:flex; gap:10px; flex-wrap:wrap;">
-                <span style="color:#94a3b8; font-size:0.9rem;">Henüz veri yok.</span>
+        <div class="stats-card">
+            <div class="stats-header">
+                <div class="stats-title">📊 HATA ANALİZİ</div>
+            </div>
+            
+            <div class="stats-tabs">
+                <div class="stat-tab active" onclick="switchMistakeTab('all', this)">GENEL</div>
+                <div class="stat-tab" onclick="switchMistakeTab('temel', this)">TEMEL</div>
+                <div class="stat-tab" onclick="switchMistakeTab('cikmis', this)">ÇIKMIŞ</div>
+                <div class="stat-tab" onclick="switchMistakeTab('ai', this)">AI</div>
+                <div class="stat-tab" onclick="switchMistakeTab('aof', this)">AOF</div>
+            </div>
+
+            <div id="mistake-stats" style="display:flex; gap:10px; flex-wrap:wrap; min-height: 50px; align-items: center;">
+                <span style="color:#94a3b8; font-size:0.9rem;">Yükleniyor...</span>
             </div>
         </div>
+
         <button class="btn" style="width: 100%;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır</button>
     </div>
 
@@ -268,22 +293,28 @@
 <script>
     /* --- 1. VERİ HAVUZLARI --- */
     
+    // TEMEL SORULAR
     const basicQuestions = [
         { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
         { q: "Devlet hava araçları nelerdir?", options: ["Askerî, gümrük, polis", "Yolcu, kargo, eğitim", "Tarım, balon, planör", "Helikopter, jet, planör"], answer: "Askerî, gümrük, polis" },
         { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" }
+        // ... (Buraya diğer 102 soruyu yapıştırın)
     ];
     
+    // ÇIKMIŞ SORULAR
     const pastQuestions = [
         { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
         { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" }
+        // ... (Buraya diğer çıkmış soruları yapıştırın)
     ];
 
+    // AI SORULARI
     const aiQuestions = [
         { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler?", options: ["Hava Trafik", "Güvenlik (Security)", "Çevre", "Arama Kurtarma"], answer: "Güvenlik (Security)" }
+        // ... (Buraya diğer AI soruları yapıştırın)
     ];
 
-    // AOF Soruları (GÜNCELLENMİŞ FORMAT)
+    // AOF Soruları (FORMATLI)
     const aofData = {
         deneme1: [
             { 
@@ -345,12 +376,13 @@
         final2: []
     };
 
-    // --- 2. UYGULAMA MANTIĞI ---
+    /* --- 2. SİSTEM MANTIĞI --- */
 
     let currentUser = null;
     let currentPool = [];
     let currentIndex = 0;
     let userAnswers = []; 
+    let currentTab = 'all'; // Varsayılan hata sekmesi
 
     window.onload = function() {
         const savedUser = localStorage.getItem('havacilik_user');
@@ -363,15 +395,13 @@
             showPage('page-login');
         }
 
-        // Enter Tuşu Login
         document.getElementById("username-input").addEventListener("keypress", function(event) {
             if (event.key === "Enter") login();
         });
 
-        // Klavye Yön Tuşları (Sol/Sağ)
+        // Klavye Yön Tuşları
         document.addEventListener('keydown', function(event) {
             if (!document.getElementById('page-quiz').classList.contains('active')) return;
-            
             if (event.key === "ArrowLeft") prevQuestion();
             if (event.key === "ArrowRight") nextQuestion();
         });
@@ -416,21 +446,44 @@
     function getDB() { return JSON.parse(localStorage.getItem('havacilik_db_v3') || '{}'); }
     function saveDB(data) { localStorage.setItem('havacilik_db_v3', JSON.stringify(data)); }
 
+    // Sorunun hangi kategoriye ait olduğunu bulur (Hata analizi için)
+    function findQuestionCategory(qText) {
+        // AOF Kontrolü
+        for (let key in aofData) {
+            if (aofData[key].some(x => x.q === qText)) return 'aof';
+        }
+        if (basicQuestions.some(x => x.q === qText)) return 'temel';
+        if (pastQuestions.some(x => x.q === qText)) return 'cikmis';
+        if (aiQuestions.some(x => x.q === qText)) return 'ai';
+        return 'other';
+    }
+
     function updateStats(question, isCorrect) {
         let db = getDB();
         if(!db[currentUser]) db[currentUser] = { stats: {} };
         
         const key = question.q;
         if(!db[currentUser].stats[key]) {
-            db[currentUser].stats[key] = { total: 0, correct: 0, wrong: 0, qObj: question };
+            // Kategoriyi ilk kez kaydederken bulup saklıyoruz
+            const cat = findQuestionCategory(key);
+            db[currentUser].stats[key] = { total: 0, correct: 0, wrong: 0, qObj: question, category: cat };
         }
         
         let stat = db[currentUser].stats[key];
         stat.total++;
         if(isCorrect) stat.correct++; else stat.wrong++;
-        stat.qObj = question;
+        stat.qObj = question; // Objenin güncel halini sakla
         
         saveDB(db);
+    }
+
+    // Hata Menüsü Sekmeleri Arası Geçiş
+    function switchMistakeTab(tabName, btn) {
+        currentTab = tabName;
+        // Buton stillerini güncelle
+        document.querySelectorAll('.stat-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMistakeMenu();
     }
 
     function renderMistakeMenu() {
@@ -439,6 +492,9 @@
         let critical = [], warning = [], info = [];
 
         Object.values(stats).forEach(item => {
+            // Filtreleme: Eğer currentTab 'all' değilse, sadece o kategoriye ait soruları al
+            if (currentTab !== 'all' && item.category !== currentTab) return;
+
             if(item.wrong > 0) {
                 let rate = (item.correct / item.total) * 100;
                 if(rate < 50) critical.push(item.qObj);
@@ -454,7 +510,7 @@
         if(warning.length > 0) container.innerHTML += `<button class="btn" style="color:#b45309; border-color:#fcd34d; background:#fffbeb;" onclick="startMistakeQuiz('warning')">🟠 Sık Hata (${warning.length})</button>`;
         if(info.length > 0) container.innerHTML += `<button class="btn" style="color:#1e40af; border-color:#bfdbfe; background:#eff6ff;" onclick="startMistakeQuiz('info')">🔵 Nadir (${info.length})</button>`;
         
-        if(critical.length===0 && warning.length===0 && info.length===0) container.innerHTML = '<span style="color:#94a3b8;">Henüz hata kaydı yok.</span>';
+        if(critical.length===0 && warning.length===0 && info.length===0) container.innerHTML = '<span style="color:#94a3b8;">Bu kategoride hata kaydı yok.</span>';
     }
 
     function startQuiz(type) {
@@ -471,6 +527,7 @@
 
         if (!sourceData || sourceData.length === 0) return alert("Soru bulunamadı.");
         
+        // Soruları ve şıkları karıştır
         currentPool = sourceData.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
@@ -484,18 +541,21 @@
     function startMistakeQuiz(cat) {
         let db = getDB();
         let stats = db[currentUser].stats;
-        let sourceData = [];
+        let pool = [];
         
         Object.values(stats).forEach(item => {
+            // Filtre: Kategori + Başarı Oranı
+            if (currentTab !== 'all' && item.category !== currentTab) return;
+
             if(item.wrong > 0) {
                 let rate = (item.correct / item.total) * 100;
-                if(cat === 'critical' && rate < 50) sourceData.push(item.qObj);
-                if(cat === 'warning' && rate >= 50 && rate < 80) sourceData.push(item.qObj);
-                if(cat === 'info' && rate >= 80) sourceData.push(item.qObj);
+                if(cat === 'critical' && rate < 50) pool.push(item.qObj);
+                if(cat === 'warning' && rate >= 50 && rate < 80) pool.push(item.qObj);
+                if(cat === 'info' && rate >= 80) pool.push(item.qObj);
             }
         });
         
-        currentPool = sourceData.map(q => {
+        currentPool = pool.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
             return newQ;
@@ -515,7 +575,7 @@
     function loadQuestion() {
         const q = currentPool[currentIndex];
         
-        // ÖNEMLİ DEĞİŞİKLİK: .innerHTML kullanarak <br> etiketlerini aktif ettik.
+        // .innerHTML ile <br> desteği sağlandı
         document.getElementById('q-text').innerHTML = `${currentIndex+1}. ${q.q}`;
         
         document.getElementById('q-counter').textContent = `Soru ${currentIndex + 1} / ${currentPool.length}`;
@@ -560,7 +620,7 @@
             if (currentIndex < currentPool.length - 1) {
                 setTimeout(() => {
                     nextQuestion();
-                }, 400);
+                }, 400); // 0.4 saniye
             }
         }
     }
