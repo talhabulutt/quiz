@@ -190,6 +190,57 @@
         .access-grid::-webkit-scrollbar { width: 6px; }
         .access-grid::-webkit-scrollbar-track { background: #f1f1f1; }
         .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+        
+        /* --- MOBİL İÇİN ÖZEL AYARLAR --- */
+    @media screen and (max-width: 768px) {
+        
+        /* Genel yazı boyutunu biraz küçült */
+        body {
+            font-size: 14px; 
+        }
+
+        /* Başlıkları küçült */
+        h1 { font-size: 1.5rem !important; }
+        h2 { font-size: 1.2rem !important; }
+
+        /* Soru metnini küçült (Masaüstünde 1.3rem idi) */
+        .question-text {
+            font-size: 1rem; 
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        /* Şıkların yazı boyutunu ve iç boşluğunu küçült */
+        .option-card {
+            font-size: 0.9rem; /* Masaüstünde 1.05rem idi */
+            padding: 12px;     /* Masaüstünde 18px idi, yer tasarrufu sağlar */
+        }
+
+        /* Butonları biraz daha kompakt yap */
+        .btn {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        /* İleri/Geri butonlarını küçült */
+        .nav-btn {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        /* Uygulama kutusunun kenar boşluklarını mobilde daralt */
+        .app-container {
+            min-height: auto; /* Mobilde sabit yükseklik yerine içeriğe göre uzasın */
+            padding-bottom: 20px;
+        }
+        
+        .page {
+            padding: 15px; /* Mobilde kenar boşluğunu azalt */
+        }
+    }
+        /* --- MOBİL İÇİN ÖZEL AYARLAR --- */
+        
     </style>
 </head>
 <body>
@@ -1298,6 +1349,7 @@
 </script>
 </body>
 </html>
+
 
 
 
