@@ -37,7 +37,7 @@
             background: var(--card);
             width: 100%;
             max-width: 900px;
-            min-height: 800px; /* Yükseklik biraz artırıldı */
+            min-height: 800px;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -46,7 +46,6 @@
             position: relative;
         }
 
-        /* SAYFA GEÇİŞLERİ */
         .page {
             display: none;
             flex-grow: 1;
@@ -57,7 +56,6 @@
         .page.active { display: flex; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* LOGIN */
         .login-wrapper { margin: auto; text-align: center; width: 100%; max-width: 400px; }
         .login-input {
             width: 100%; padding: 16px; border-radius: 8px; border: 2px solid var(--border);
@@ -65,7 +63,6 @@
         }
         .login-input:focus { border-color: var(--primary); outline: none; background: #fff; }
 
-        /* BUTONLAR */
         .btn {
             background: white; border: 2px solid var(--border); color: #334155;
             padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: 600;
@@ -79,7 +76,6 @@
 
         .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
 
-        /* HEADER & USER */
         .user-header {
             position: absolute; top: 20px; right: 20px; z-index: 10;
             display: flex; align-items: center; gap: 15px;
@@ -89,7 +85,6 @@
         }
         .logout-link { color: var(--danger); cursor: pointer; font-weight: 600; }
 
-        /* HATA ANALİZ KARTI */
         .stats-card {
             background: #f8fafc;
             border-radius: 12px;
@@ -115,7 +110,6 @@
         }
         .stat-tab:hover:not(.active) { background: #e2e8f0; }
 
-        /* QUIZ ALANI */
         .quiz-row-1 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .quiz-user-badge { font-size: 0.9rem; font-weight: 600; color: var(--primary); background: #eff6ff; padding: 5px 12px; border-radius: 15px; }
 
@@ -214,14 +208,14 @@
         <h2 style="color: #1e293b; margin-bottom: 20px;">Ana Menü</h2>
         
         <div class="grid-menu">
-            <button class="btn" onclick="startQuiz('temel')">✈️ (102) Temel Sorular</button>
-            <button class="btn" onclick="startQuiz('cikmis')">📜 (48) Çıkmış Sorular</button>
-            <button class="btn" onclick="startQuiz('ai')">🤖 (40) AI Öğretici</button>
+            <button class="btn" id="btn-temel" onclick="startQuiz('temel')">✈️ Temel Sorular</button>
+            <button class="btn" id="btn-cikmis" onclick="startQuiz('cikmis')">📜 Çıkmış Sorular</button>
+            <button class="btn" id="btn-ai" onclick="startQuiz('ai')">🤖 AI Öğretici</button>
         </div>
 
-        <button class="btn" style="width: 100%; margin-bottom: 20px;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır (Maraton)</button>
+        <button class="btn" id="btn-mix" style="width: 100%; margin-bottom: 20px;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır (Maraton)</button>
 
-        <button class="btn btn-primary" style="margin-bottom: 25px;" onclick="showPage('page-aof')">📚 AOF Modülü (Deneme/Final)</button>
+        <button class="btn btn-primary" id="btn-aof-modul" style="margin-bottom: 25px;" onclick="showPage('page-aof')">📚 AOF Modülü (Deneme/Final)</button>
         
         <div class="stats-card">
             <div class="stats-header">
@@ -246,31 +240,13 @@
         <button class="btn" style="width: auto; align-self: flex-start; margin-bottom: 20px;" onclick="showPage('page-menu')">← Geri</button>
         <h2 style="margin-bottom: 20px;">AOF Sınavları</h2>
         
-        <div class="grid-menu">
-            <button class="btn" onclick="startQuiz('aof_deneme1')">📝 (20) Deneme 1</button>
-            <button class="btn" onclick="startQuiz('aof_deneme2')">📝 (20) Deneme 2</button>
-            <button class="btn" onclick="startQuiz('aof_deneme3')">📝 (20) Deneme 3</button>
-            <button class="btn" onclick="startQuiz('aof_deneme4')">📝 (20) Deneme 4</button>
-            <button class="btn" onclick="startQuiz('aof_deneme5')">📝 (20) Deneme 5</button>
-            <button class="btn" onclick="startQuiz('aof_deneme6')">📝 (20) Deneme 6</button>
-            <button class="btn" onclick="startQuiz('aof_deneme7')">📝 (20) Deneme 7</button>
-            <button class="btn" onclick="startQuiz('aof_deneme8')">📝 (20) Deneme 8</button>
-        </div>
+        <div class="grid-menu" id="aof-deneme-grid">
+            </div>
 
-        <div class="grid-menu" style="margin-top:20px;">
-            <button class="btn" onclick="startQuiz('aof_final1')">🎓 (20) Final 1</button>
-            <button class="btn" onclick="startQuiz('aof_final2')">🎓 (20) Final 2</button>
-            <button class="btn" onclick="startQuiz('aof_final3')">🎓 (20) Final 3</button>
-            <button class="btn" onclick="startQuiz('aof_final4')">🎓 (20) Final 4</button>
-            <button class="btn" onclick="startQuiz('aof_final5')">🎓 (20) Final 5</button>
-            <button class="btn" onclick="startQuiz('aof_final6')">🎓 (20) Final 6</button>
-            <button class="btn" onclick="startQuiz('aof_final7')">🎓 (20) Final 7</button>
-            <button class="btn" onclick="startQuiz('aof_final8')">🎓 (20) Final 8</button>
-            <button class="btn" onclick="startQuiz('aof_final9')">🎓 (20) Final 9</button>
-            <button class="btn" onclick="startQuiz('aof_final10')">🎓 (20) Final 10</button>
-        </div>
+        <div class="grid-menu" id="aof-final-grid" style="margin-top:20px;">
+             </div>
         
-        <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi (Tümü)</button>
+        <button class="btn btn-primary" id="btn-aof-mix" style="margin-top: 20px; width: 100%;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi (Tümü)</button>
     </div>
 
     <div id="page-quiz" class="page">
@@ -925,6 +901,11 @@
             showPage('page-login');
         }
 
+        // Dinamik Soru Sayılarını Güncelle
+        updateQuestionCounts();
+        // AOF Menüsünü Oluştur
+        generateAOFMenu();
+
         document.getElementById("username-input").addEventListener("keypress", function(event) {
             if (event.key === "Enter") login();
         });
@@ -949,16 +930,76 @@
         });
     };
 
+    // Dinamik Soru Sayısı Güncelleme
+    function updateQuestionCounts() {
+        // Ana Menü
+        updateBtnText('btn-temel', `✈️ (${basicQuestions.length}) Temel Sorular`);
+        updateBtnText('btn-cikmis', `📜 (${pastQuestions.length}) Çıkmış Sorular`);
+        updateBtnText('btn-ai', `🤖 (${aiQuestions.length}) AI Öğretici`);
+        
+        let totalAof = 0;
+        for(let key in aofData) totalAof += aofData[key].length;
+        updateBtnText('btn-aof-modul', `📚 (${totalAof}) AOF Modülü (Deneme/Final)`);
+        
+        // Mix
+        let totalMix = basicQuestions.length + pastQuestions.length + aiQuestions.length + totalAof;
+        updateBtnText('btn-mix', `🔀 (${totalMix}) Tümünü Karıştır (Maraton)`);
+        
+        updateBtnText('btn-aof-mix', `🔀 (${totalAof}) Karışık AOF Testi (Tümü)`);
+    }
+
+    function updateBtnText(id, text) {
+        const btn = document.getElementById(id);
+        if(btn) btn.textContent = text;
+    }
+
+    // AOF Menüsünü Otomatik Oluştur
+    function generateAOFMenu() {
+        const denemeGrid = document.getElementById('aof-deneme-grid');
+        const finalGrid = document.getElementById('aof-final-grid');
+        
+        // Temizle
+        denemeGrid.innerHTML = '';
+        finalGrid.innerHTML = '';
+
+        // Denemeler (deneme1 ... deneme8)
+        for(let i=1; i<=8; i++) {
+            const key = `deneme${i}`;
+            const count = aofData[key] ? aofData[key].length : 0;
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.textContent = `📝 (${count}) Deneme ${i}`;
+            btn.onclick = () => startQuiz(`aof_${key}`);
+            denemeGrid.appendChild(btn);
+        }
+
+        // Finaller (final1 ... final10)
+        for(let i=1; i<=10; i++) {
+            const key = `final${i}`;
+            const count = aofData[key] ? aofData[key].length : 0;
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.textContent = `🎓 (${count}) Final ${i}`;
+            btn.onclick = () => startQuiz(`aof_${key}`);
+            finalGrid.appendChild(btn);
+        }
+    }
+
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
+        
         const infoPanel = document.getElementById('user-info-panel');
         if (id === 'page-menu' || id === 'page-aof' || id === 'page-result') {
             infoPanel.style.display = 'flex';
         } else {
             infoPanel.style.display = 'none';
         }
-        if(id === 'page-menu') renderMistakeMenu();
+
+        if(id === 'page-menu') {
+            renderMistakeMenu();
+            updateQuestionCounts(); // Menüye her dönüşte sayıları güncelle
+        }
     }
 
     function login() {
@@ -1054,9 +1095,13 @@
         else if (type === 'ai') sourceData = aiQuestions;
         else if (type === 'mix') sourceData = [...basicQuestions, ...pastQuestions, ...aiQuestions, ...allAof];
         else if (type === 'aof_mix') sourceData = allAof;
-        else if (aofData[type]) sourceData = aofData[type];
+        else if (type.startsWith('aof_')) {
+            // "aof_deneme1" gibi gelen string'i parçala
+            const key = type.replace('aof_', '');
+            if (aofData[key]) sourceData = aofData[key];
+        }
 
-        if (!sourceData || sourceData.length === 0) return alert("Soru bulunamadı. Veri eklediğinizden emin olun.");
+        if (!sourceData || sourceData.length === 0) return alert("Bu kategoride soru bulunamadı. Lütfen soruları ekleyin.");
         
         currentPool = sourceData.map(q => {
             let newQ = { ...q };
@@ -1083,6 +1128,8 @@
             }
         });
         
+        if(pool.length === 0) return alert("Bu kategoride hata sorusu yok.");
+
         currentPool = pool.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
@@ -1145,7 +1192,7 @@
             if (currentIndex < currentPool.length - 1) {
                 setTimeout(() => {
                     nextQuestion();
-                }, 400); // 0.4 saniye
+                }, 400); 
             }
         }
     }
@@ -1159,24 +1206,7 @@
         
         opts.forEach(btn => {
             btn.style.pointerEvents = 'none';
-            // option-key-hint'i temizleyip metni almamız gerekebilir veya
-            // handleAnswer'da zaten 'selected' metnini temiz saklıyoruz.
-            // HTML içeriğinden metni sıyırmak:
-            const rawText = btn.textContent.trim().substring(2).trim(); // "1 " kısmını at
-            // Daha güvenli:
-            // btn.innerText "1 A Şıkkı" -> split
-            
-            // Basit string karşılaştırması bazen "1 " yüzünden hatalı olabilir.
-            // En temizi: btn.onclick ile gelen 'opt' değişkeniyle eşleşme.
-            // Ancak burada DOM üzerinden gidiyoruz.
-            // Bu sorunu çözmek için HTML yapısını koruyup sadece text'i kontrol edelim:
-            
-            // Eğer btn'in textContent'i (numara dahil) ile original opt arasında fark varsa
-            // 'selected' değişkeni orijinal opt metnidir.
-            
-            // Düzeltme: innerHTML ile eklediğimiz için 'opt' ile eşleştirmek zor olabilir.
-            // En basit çözüm: btn.innerText.includes(q.answer)
-            
+            // HTML içinden sadece metni alıp kontrol ediyoruz
             if(btn.innerText.includes(q.answer)) {
                  btn.classList.add(ans.isCorrect ? 'correct' : 'hint');
             }
