@@ -37,7 +37,7 @@
             background: var(--card);
             width: 100%;
             max-width: 900px;
-            min-height: 780px;
+            min-height: 800px; /* Yükseklik biraz artırıldı */
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -214,12 +214,12 @@
         <h2 style="color: #1e293b; margin-bottom: 20px;">Ana Menü</h2>
         
         <div class="grid-menu">
-            <button class="btn" onclick="startQuiz('temel')">✈️ Temel Sorular (102)</button>
-            <button class="btn" onclick="startQuiz('cikmis')">📜 Çıkmış Sorular (48)</button>
-            <button class="btn" onclick="startQuiz('ai')">🤖 AI Öğretici (40)</button>
+            <button class="btn" onclick="startQuiz('temel')">✈️ (102) Temel Sorular</button>
+            <button class="btn" onclick="startQuiz('cikmis')">📜 (48) Çıkmış Sorular</button>
+            <button class="btn" onclick="startQuiz('ai')">🤖 (40) AI Öğretici</button>
         </div>
 
-        <button class="btn" style="width: 100%; margin-bottom: 20px;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır</button>
+        <button class="btn" style="width: 100%; margin-bottom: 20px;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır (Maraton)</button>
 
         <button class="btn btn-primary" style="margin-bottom: 25px;" onclick="showPage('page-aof')">📚 AOF Modülü (Deneme/Final)</button>
         
@@ -245,29 +245,32 @@
     <div id="page-aof" class="page">
         <button class="btn" style="width: auto; align-self: flex-start; margin-bottom: 20px;" onclick="showPage('page-menu')">← Geri</button>
         <h2 style="margin-bottom: 20px;">AOF Sınavları</h2>
+        
         <div class="grid-menu">
-            <button class="btn" onclick="startQuiz('aof_deneme1')">📝 Deneme 1</button>
-            <button class="btn" onclick="startQuiz('aof_deneme2')">📝 Deneme 2</button>
-            <button class="btn" onclick="startQuiz('aof_deneme3')">📝 Deneme 3</button>
-            <button class="btn" onclick="startQuiz('aof_deneme4')">📝 Deneme 4</button>
-            <button class="btn" onclick="startQuiz('aof_deneme5')">📝 Deneme 5</button>
-            <button class="btn" onclick="startQuiz('aof_deneme6')">📝 Deneme 6</button>
-            <button class="btn" onclick="startQuiz('aof_deneme7')">📝 Deneme 7</button>
-            <button class="btn" onclick="startQuiz('aof_deneme8')">📝 Deneme 8</button>
+            <button class="btn" onclick="startQuiz('aof_deneme1')">📝 (20) Deneme 1</button>
+            <button class="btn" onclick="startQuiz('aof_deneme2')">📝 (20) Deneme 2</button>
+            <button class="btn" onclick="startQuiz('aof_deneme3')">📝 (20) Deneme 3</button>
+            <button class="btn" onclick="startQuiz('aof_deneme4')">📝 (20) Deneme 4</button>
+            <button class="btn" onclick="startQuiz('aof_deneme5')">📝 (20) Deneme 5</button>
+            <button class="btn" onclick="startQuiz('aof_deneme6')">📝 (20) Deneme 6</button>
+            <button class="btn" onclick="startQuiz('aof_deneme7')">📝 (20) Deneme 7</button>
+            <button class="btn" onclick="startQuiz('aof_deneme8')">📝 (20) Deneme 8</button>
         </div>
-        <div class="grid-menu">
-            <button class="btn" onclick="startQuiz('aof_final1')">🎓 Final 1</button>
-            <button class="btn" onclick="startQuiz('aof_final2')">🎓 Final 2</button>
-            <button class="btn" onclick="startQuiz('aof_final3')">🎓 Final 3</button>
-            <button class="btn" onclick="startQuiz('aof_final4')">🎓 Final 4</button>
-            <button class="btn" onclick="startQuiz('aof_final5')">🎓 Final 5</button>
-            <button class="btn" onclick="startQuiz('aof_final6')">🎓 Final 6</button>
-            <button class="btn" onclick="startQuiz('aof_final7')">🎓 Final 7</button>
-            <button class="btn" onclick="startQuiz('aof_final8')">🎓 Final 8</button>
-            <button class="btn" onclick="startQuiz('aof_final9')">🎓 Final 9</button>
-            <button class="btn" onclick="startQuiz('aof_final10')">🎓 Final 10</button>
+
+        <div class="grid-menu" style="margin-top:20px;">
+            <button class="btn" onclick="startQuiz('aof_final1')">🎓 (20) Final 1</button>
+            <button class="btn" onclick="startQuiz('aof_final2')">🎓 (20) Final 2</button>
+            <button class="btn" onclick="startQuiz('aof_final3')">🎓 (20) Final 3</button>
+            <button class="btn" onclick="startQuiz('aof_final4')">🎓 (20) Final 4</button>
+            <button class="btn" onclick="startQuiz('aof_final5')">🎓 (20) Final 5</button>
+            <button class="btn" onclick="startQuiz('aof_final6')">🎓 (20) Final 6</button>
+            <button class="btn" onclick="startQuiz('aof_final7')">🎓 (20) Final 7</button>
+            <button class="btn" onclick="startQuiz('aof_final8')">🎓 (20) Final 8</button>
+            <button class="btn" onclick="startQuiz('aof_final9')">🎓 (20) Final 9</button>
+            <button class="btn" onclick="startQuiz('aof_final10')">🎓 (20) Final 10</button>
         </div>
-        <button class="btn btn-primary" style="margin-top: 10px;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi</button>
+        
+        <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi (Tümü)</button>
     </div>
 
     <div id="page-quiz" class="page">
@@ -322,13 +325,7 @@
 </div>
 
 <script>
-    /* --- 1. VERİ HAVUZLARI --- */
     
-    // !!! DİKKAT !!!
-    // Buraya önceki mesajdaki 'basicQuestions', 'pastQuestions', 'aiQuestions' dizilerinin 
-    // ve az önce hazırladığımız 'aofData' nesnesinin tamamını yapıştırın.
-    // Kod çok uzun olduğu için burada boş bırakıldı, sizin verileri eklemeniz gerekmektedir.
-
     
     // --- 1. VERİ HAVUZLARI (TAMAMI DOLDURULDU) ---
 
@@ -932,23 +929,21 @@
             if (event.key === "Enter") login();
         });
 
-        // KLAVYE KONTROLLERİ (OK TUŞLARI + SAYILAR)
         document.addEventListener('keydown', function(event) {
             if (!document.getElementById('page-quiz').classList.contains('active')) return;
             
-            // Ok Tuşları
             if (event.key === "ArrowLeft") prevQuestion();
             if (event.key === "ArrowRight") {
                 if (currentIndex < currentPool.length - 1) nextQuestion();
             }
-
-            // Sayı Tuşları (1-5)
+            
+            // Klavye ile Şık Seçimi (1,2,3,4,5)
             const keyMap = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4 };
             if (keyMap.hasOwnProperty(event.key)) {
-                const index = keyMap[event.key];
+                const idx = keyMap[event.key];
                 const options = document.querySelectorAll('.option-card');
-                if (options[index]) {
-                    options[index].click(); // Tıklamayı simüle et
+                if (options[idx] && options[idx].style.pointerEvents !== 'none') {
+                    options[idx].click();
                 }
             }
         });
@@ -957,14 +952,12 @@
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        
         const infoPanel = document.getElementById('user-info-panel');
         if (id === 'page-menu' || id === 'page-aof' || id === 'page-result') {
             infoPanel.style.display = 'flex';
         } else {
             infoPanel.style.display = 'none';
         }
-
         if(id === 'page-menu') renderMistakeMenu();
     }
 
@@ -1006,18 +999,15 @@
     function updateStats(question, isCorrect) {
         let db = getDB();
         if(!db[currentUser]) db[currentUser] = { stats: {} };
-        
         const key = question.q;
         if(!db[currentUser].stats[key]) {
             const cat = findQuestionCategory(key);
             db[currentUser].stats[key] = { total: 0, correct: 0, wrong: 0, qObj: question, category: cat };
         }
-        
         let stat = db[currentUser].stats[key];
         stat.total++;
         if(isCorrect) stat.correct++; else stat.wrong++;
         stat.qObj = question;
-        
         saveDB(db);
     }
 
@@ -1056,20 +1046,17 @@
 
     function startQuiz(type) {
         let sourceData = [];
-        // Tüm AOF verilerini birleştir
         const allAof = [];
-        for (let key in aofData) {
-             allAof.push(...aofData[key]);
-        }
+        for (let key in aofData) { allAof.push(...aofData[key]); }
 
         if (type === 'temel') sourceData = basicQuestions;
         else if (type === 'cikmis') sourceData = pastQuestions;
         else if (type === 'ai') sourceData = aiQuestions;
         else if (type === 'mix') sourceData = [...basicQuestions, ...pastQuestions, ...aiQuestions, ...allAof];
         else if (type === 'aof_mix') sourceData = allAof;
-        else if (aofData[type]) sourceData = aofData[type]; // AOF alt kümeleri
+        else if (aofData[type]) sourceData = aofData[type];
 
-        if (!sourceData || sourceData.length === 0) return alert("Soru bulunamadı.");
+        if (!sourceData || sourceData.length === 0) return alert("Soru bulunamadı. Veri eklediğinizden emin olun.");
         
         currentPool = sourceData.map(q => {
             let newQ = { ...q };
@@ -1088,7 +1075,6 @@
         
         Object.values(stats).forEach(item => {
             if (currentTab !== 'all' && item.category !== currentTab) return;
-
             if(item.wrong > 0) {
                 let rate = (item.correct / item.total) * 100;
                 if(cat === 'critical' && rate < 50) pool.push(item.qObj);
@@ -1116,7 +1102,6 @@
 
     function loadQuestion() {
         const q = currentPool[currentIndex];
-        
         document.getElementById('q-text').innerHTML = `${currentIndex+1}. ${q.q}`;
         document.getElementById('q-counter').textContent = `Soru ${currentIndex + 1} / ${currentPool.length}`;
         document.getElementById('q-progress').style.width = `${((currentIndex+1)/currentPool.length)*100}%`;
@@ -1127,7 +1112,6 @@
         q.options.forEach((opt, idx) => {
             const btn = document.createElement('div');
             btn.className = 'option-card';
-            // 1,2,3 tuşları için ipucu (Opsiyonel, görsel olarak numara ekler)
             btn.innerHTML = `<span class="option-key-hint">${idx+1}</span> ${opt}`;
             btn.onclick = () => handleAnswer(opt, btn);
             optsDiv.appendChild(btn);
@@ -1161,7 +1145,7 @@
             if (currentIndex < currentPool.length - 1) {
                 setTimeout(() => {
                     nextQuestion();
-                }, 400); 
+                }, 400); // 0.4 saniye
             }
         }
     }
@@ -1175,18 +1159,29 @@
         
         opts.forEach(btn => {
             btn.style.pointerEvents = 'none';
-            // btn.innerText içinde "1 A Şıkkı" gibi bir yapı var, kontrol ederken dikkat
-            // veya textContent kullanırken "1 " kısmını ayıklamak gerekebilir.
-            // En temizi, handleAnswer'da 'selected' parametresini kullanmak.
+            // option-key-hint'i temizleyip metni almamız gerekebilir veya
+            // handleAnswer'da zaten 'selected' metnini temiz saklıyoruz.
+            // HTML içeriğinden metni sıyırmak:
+            const rawText = btn.textContent.trim().substring(2).trim(); // "1 " kısmını at
+            // Daha güvenli:
+            // btn.innerText "1 A Şıkkı" -> split
             
-            // Text içeriğinde şıkkın kendisi geçiyor mu diye bakmak basit bir çözüm:
-            const btnText = btn.textContent.substring(2).trim(); // Baştaki "1 " kısmını at
+            // Basit string karşılaştırması bazen "1 " yüzünden hatalı olabilir.
+            // En temizi: btn.onclick ile gelen 'opt' değişkeniyle eşleşme.
+            // Ancak burada DOM üzerinden gidiyoruz.
+            // Bu sorunu çözmek için HTML yapısını koruyup sadece text'i kontrol edelim:
             
-            if(btnText === q.answer) {
-                btn.classList.add(ans.isCorrect ? 'correct' : 'hint');
+            // Eğer btn'in textContent'i (numara dahil) ile original opt arasında fark varsa
+            // 'selected' değişkeni orijinal opt metnidir.
+            
+            // Düzeltme: innerHTML ile eklediğimiz için 'opt' ile eşleştirmek zor olabilir.
+            // En basit çözüm: btn.innerText.includes(q.answer)
+            
+            if(btn.innerText.includes(q.answer)) {
+                 btn.classList.add(ans.isCorrect ? 'correct' : 'hint');
             }
-            if(btnText === ans.selected && !ans.isCorrect) {
-                btn.classList.add('incorrect');
+            if(btn.innerText.includes(ans.selected) && !ans.isCorrect) {
+                 btn.classList.add('incorrect');
             }
         });
     }
@@ -1196,23 +1191,16 @@
     function renderFastAccess() {
         const grid = document.getElementById('fast-access-grid');
         grid.innerHTML = '';
-        
         currentPool.forEach((_, i) => {
             const btn = document.createElement('div');
             btn.className = 'access-btn';
             btn.textContent = i + 1;
-            
             if (i === currentIndex) btn.classList.add('current');
-            
             if (userAnswers[i]) {
                 if (userAnswers[i].isCorrect) btn.classList.add('correct');
                 else btn.classList.add('incorrect');
             }
-            
-            btn.onclick = () => {
-                currentIndex = i;
-                loadQuestion();
-            };
+            btn.onclick = () => { currentIndex = i; loadQuestion(); };
             grid.appendChild(btn);
         });
     }
@@ -1278,13 +1266,11 @@
 
     function retrySessionMistakes() {
         const wrongs = userAnswers.filter(a => !a.isCorrect).map(a => a.qObj);
-        
         currentPool = wrongs.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
             return newQ;
         });
-
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
@@ -1292,4 +1278,3 @@
 </script>
 </body>
 </html>
-
