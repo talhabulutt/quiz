@@ -379,7 +379,9 @@
 
     <div id="page-quiz" class="page">
         <div class="quiz-row-1">
-            <button onclick="endQuiz()" style="background:none; border:none; color:#94a3b8; font-weight:bold; cursor:pointer; font-size: 0.9rem;">✕ Testten Çık</button>
+            <button onclick="endQuiz()" style="background:none; border:none; color:#94a3b8; font-weight:bold; cursor:pointer; font-size: 0.9rem;">✕ Çık</button>
+
+            <span id="quiz-title" style="font-weight: 800; color: var(--text-main); font-size: 1rem; text-align: center;">Test Adı</span>
             <div class="quiz-user-badge">👤 <span id="display-username-quiz">Kullanıcı</span></div>
         </div>
         <div class="quiz-row-2">
@@ -1214,14 +1216,38 @@
 
     function startQuiz(type) {
         
-        // --- BU KISMI EKLEYİN ---
     // Eğer test türü 'aof' ile başlıyorsa (örn: aof_deneme1, aof_mix vs.) dönüş AOF sayfası olsun
     if (type.startsWith('aof')) {
         returnPageId = 'page-aof';
     } else {
         returnPageId = 'page-menu';
     }
-    // ------------------------
+        // ------------------------
+        // --- TEST BAŞLIĞINI BELİRLE VE YAZDIR (YENİ KISIM) ---
+        let titleText = "";
+        
+        if (type === 'temel') titleText = "✈️ Temel Sorular";
+        else if (type === 'cikmis') titleText = "📜 Çıkmış Sorular";
+        else if (type === 'ai') titleText = "🤖 AI Öğretici";
+        else if (type === 'mix') titleText = "🔀 Karışık Test";
+        else if (type === 'aof_mix') titleText = "📚 AOF Karışık";
+        else if (type.startsWith('aof_deneme')) {
+            // "aof_deneme1" -> "1" sayısını alıp yazdırır
+            let num = type.replace('aof_deneme', '');
+            titleText = "📝 AOF Deneme " + num;
+        }
+        else if (type.startsWith('aof_final')) {
+            // "aof_final1" -> "1" sayısını alıp yazdırır
+            let num = type.replace('aof_final', '');
+            titleText = "🎓 AOF Final " + num;
+        }
+        else if (type === 'critical') titleText = "🔴 Kritik Hatalar";
+        else if (type === 'warning') titleText = "🟠 Sık Yapılan Hatalar";
+        else if (type === 'info') titleText = "🔵 Nadir Hatalar";
+
+        // Başlığı HTML'e gönder
+        document.getElementById('quiz-title').textContent = titleText;
+        // -------------------------------------------------------
 
     let sourceData = [];
         // Tüm AOF verilerini birleştir
@@ -1470,6 +1496,7 @@
 </script>
 </body>
 </html>
+
 
 
 
