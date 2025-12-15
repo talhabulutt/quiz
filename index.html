@@ -90,33 +90,24 @@
         .logout-link { color: var(--danger); cursor: pointer; font-weight: 600; }
 
         /* --- QUIZ ALANI --- */
-        
-        .quiz-row-1 {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .quiz-user-badge {
-            font-size: 0.9rem; font-weight: 600; color: var(--primary);
-            background: #eff6ff; padding: 5px 12px; border-radius: 15px;
-        }
+        .quiz-row-1 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .quiz-user-badge { font-size: 0.9rem; font-weight: 600; color: var(--primary); background: #eff6ff; padding: 5px 12px; border-radius: 15px; }
 
         .quiz-row-2 { margin-bottom: 15px; }
         .progress-container { width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
 
-        .quiz-row-3 {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--border);
-            margin-bottom: 20px;
-        }
+        .quiz-row-3 { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
         .question-counter { font-weight: 700; color: var(--secondary); font-size: 1rem; }
 
-        .question-text { font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 25px; line-height: 1.5; }
+        /* Soru Metni: Satır aralığı artırıldı, pre-line eklendi */
+        .question-text { 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            color: var(--text-main); 
+            margin-bottom: 25px; 
+            line-height: 1.6; 
+        }
         
         .option-card {
             padding: 18px; border: 2px solid var(--border); border-radius: 10px;
@@ -135,10 +126,7 @@
 
         .fast-access-container { margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; }
         .fast-access-title { text-align: center; font-size: 0.85rem; color: var(--secondary); margin-bottom: 10px; }
-        .access-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(35px, 1fr)); gap: 6px;
-            max-height: 150px; overflow-y: auto; padding: 5px;
-        }
+        .access-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(35px, 1fr)); gap: 6px; max-height: 150px; overflow-y: auto; padding: 5px; }
         .access-btn {
             height: 35px; display: flex; align-items: center; justify-content: center;
             background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px;
@@ -157,24 +145,25 @@
         input:checked + .slider:before { transform: translateX(20px); }
         .switch-label { font-size: 0.9rem; color: var(--secondary); font-weight: 600; margin-right: 10px; }
 
-        /* SONUÇ EKRANI */
         .score-circle {
-            width: 150px; height: 150px; border-radius: 50%;
-            background: transparent;
+            width: 150px; height: 150px; border-radius: 50%; background: transparent;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            margin: 0 auto 20px; font-size: 2.2rem; font-weight: 800;
-            color: var(--text-main);
-            border: 10px solid #e2e8f0;
+            margin: 0 auto 20px; font-size: 2.2rem; font-weight: 800; color: var(--text-main); border: 10px solid #e2e8f0;
         }
         .score-circle.good { border-color: var(--success); color: var(--success); }
         .score-circle.bad { border-color: var(--danger); color: var(--danger); }
-        
         .score-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #64748b; margin-top: 5px; }
+
+        .mistake-cat { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+        .mistake-cat:hover { transform: translateX(5px); }
+        .cat-critical { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+        .cat-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+        .cat-info { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+        .cat-badge { font-weight: bold; padding: 4px 8px; border-radius: 12px; background: rgba(255,255,255,0.6); font-size: 0.8rem; }
 
         .access-grid::-webkit-scrollbar { width: 6px; }
         .access-grid::-webkit-scrollbar-track { background: #f1f1f1; }
         .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-
     </style>
 </head>
 <body>
@@ -197,16 +186,12 @@
 
     <div id="page-menu" class="page">
         <h2 style="color: #1e293b; margin-bottom: 20px;">Ana Menü</h2>
-        
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('temel')">✈️ Temel Sorular (102)</button>
             <button class="btn" onclick="startQuiz('cikmis')">📜 Çıkmış Sorular (48)</button>
             <button class="btn" onclick="startQuiz('ai')">🤖 AI Öğretici (40)</button>
         </div>
-
-        <button class="btn btn-primary" style="margin-bottom: 20px;" onclick="showPage('page-aof')">
-            📚 AOF Modülü (Deneme/Final)
-        </button>
+        <button class="btn btn-primary" style="margin-bottom: 20px;" onclick="showPage('page-aof')">📚 AOF Modülü (Deneme/Final)</button>
         
         <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px;">
             <h4 style="margin:0 0 10px 0; font-size:0.9rem; color:var(--secondary);">HATA ANALİZİ</h4>
@@ -214,7 +199,6 @@
                 <span style="color:#94a3b8; font-size:0.9rem;">Henüz veri yok.</span>
             </div>
         </div>
-
         <button class="btn" style="width: 100%;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır</button>
     </div>
 
@@ -231,18 +215,13 @@
     </div>
 
     <div id="page-quiz" class="page">
-        
         <div class="quiz-row-1">
             <button onclick="endQuiz()" style="background:none; border:none; color:#94a3b8; font-weight:bold; cursor:pointer; font-size: 0.9rem;">✕ Testten Çık</button>
-            <div class="quiz-user-badge">
-                👤 <span id="display-username-quiz">Kullanıcı</span>
-            </div>
+            <div class="quiz-user-badge">👤 <span id="display-username-quiz">Kullanıcı</span></div>
         </div>
-
         <div class="quiz-row-2">
             <div class="progress-container"><div class="progress-fill" id="q-progress"></div></div>
         </div>
-
         <div class="quiz-row-3">
             <span class="question-counter" id="q-counter">Soru 1/10</span>
             <div style="display:flex; align-items:center;">
@@ -270,15 +249,12 @@
 
     <div id="page-result" class="page">
         <div style="margin: auto; text-align: center;">
-            
             <div class="score-circle" id="result-circle">
                 <span id="res-score">%0</span>
                 <span class="score-label">BAŞARI</span>
             </div>
-
             <h2 id="res-msg">Sonuç</h2>
             <p style="color:var(--secondary); margin-bottom:30px;">Sonuçlar analiz edildi.</p>
-            
             <div style="display:flex; flex-direction:column; gap:15px; max-width:400px; margin:0 auto;">
                 <button id="btn-retry-session" class="btn btn-danger" style="display:none;" onclick="retrySessionMistakes()">⚠️ Bu Testteki Yanlışları Çöz</button>
                 <button class="btn btn-primary" onclick="restartQuiz()">🔄 Aynı Testi Tekrarla</button>
@@ -292,28 +268,22 @@
 <script>
     /* --- 1. VERİ HAVUZLARI --- */
     
-    // TEMEL SORULAR (102 Adet)
     const basicQuestions = [
         { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
         { q: "Devlet hava araçları nelerdir?", options: ["Askerî, gümrük, polis", "Yolcu, kargo, eğitim", "Tarım, balon, planör", "Helikopter, jet, planör"], answer: "Askerî, gümrük, polis" },
         { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" }
-        // ... (Buraya diğer tüm 102 sorunuzu ekleyin)
     ];
     
-    // ÇIKMIŞ SORULAR (48 Adet)
     const pastQuestions = [
         { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
         { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" }
-        // ... (Buraya diğer çıkmış sorularınızı ekleyin)
     ];
 
-    // AI SORULARI (40 Adet)
     const aiQuestions = [
         { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler?", options: ["Hava Trafik", "Güvenlik (Security)", "Çevre", "Arama Kurtarma"], answer: "Güvenlik (Security)" }
-        // ... (Buraya diğer AI sorularınızı ekleyin)
     ];
 
-    // AOF Soruları (Satır Satır Düzenlenmiş Hali)
+    // AOF Soruları (GÜNCELLENMİŞ FORMAT)
     const aofData = {
         deneme1: [
             { 
@@ -375,14 +345,13 @@
         final2: []
     };
 
-    /* --- 2. SİSTEM MANTIĞI --- */
+    // --- 2. UYGULAMA MANTIĞI ---
 
     let currentUser = null;
     let currentPool = [];
     let currentIndex = 0;
     let userAnswers = []; 
 
-    // Başlangıç ve Enter Tuşu
     window.onload = function() {
         const savedUser = localStorage.getItem('havacilik_user');
         if (savedUser) {
@@ -394,8 +363,17 @@
             showPage('page-login');
         }
 
+        // Enter Tuşu Login
         document.getElementById("username-input").addEventListener("keypress", function(event) {
             if (event.key === "Enter") login();
+        });
+
+        // Klavye Yön Tuşları (Sol/Sağ)
+        document.addEventListener('keydown', function(event) {
+            if (!document.getElementById('page-quiz').classList.contains('active')) return;
+            
+            if (event.key === "ArrowLeft") prevQuestion();
+            if (event.key === "ArrowRight") nextQuestion();
         });
     };
 
@@ -413,7 +391,6 @@
         if(id === 'page-menu') renderMistakeMenu();
     }
 
-    // Login
     function login() {
         const val = document.getElementById('username-input').value.trim();
         if(!val) return alert("İsim giriniz.");
@@ -436,11 +413,9 @@
         document.getElementById('display-username-quiz').textContent = currentUser;
     }
 
-    // Veritabanı
     function getDB() { return JSON.parse(localStorage.getItem('havacilik_db_v3') || '{}'); }
     function saveDB(data) { localStorage.setItem('havacilik_db_v3', JSON.stringify(data)); }
 
-    // Hata İstatistiği
     function updateStats(question, isCorrect) {
         let db = getDB();
         if(!db[currentUser]) db[currentUser] = { stats: {} };
@@ -453,7 +428,6 @@
         let stat = db[currentUser].stats[key];
         stat.total++;
         if(isCorrect) stat.correct++; else stat.wrong++;
-        // Nesne güncelliği için
         stat.qObj = question;
         
         saveDB(db);
@@ -483,7 +457,6 @@
         if(critical.length===0 && warning.length===0 && info.length===0) container.innerHTML = '<span style="color:#94a3b8;">Henüz hata kaydı yok.</span>';
     }
 
-    // Quiz Başlatma (ŞIK KARIŞTIRMA ÖZELLİĞİ EKLENDİ)
     function startQuiz(type) {
         let sourceData = [];
         if (type === 'temel') sourceData = basicQuestions;
@@ -498,18 +471,13 @@
 
         if (!sourceData || sourceData.length === 0) return alert("Soru bulunamadı.");
         
-        // Havuzu oluştururken hem soruları hem şıkları kopyalayıp karıştırıyoruz
         currentPool = sourceData.map(q => {
-            // Sorunun kopyasını oluştur
             let newQ = { ...q };
-            // Şıkları kopyala ve karıştır
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
             return newQ;
         });
 
-        // Soruların sırasını karıştır
         currentPool.sort(() => Math.random() - 0.5);
-        
         initQuizUI();
     }
 
@@ -527,7 +495,6 @@
             }
         });
         
-        // Hatalı sorularda da şıkları karıştır
         currentPool = sourceData.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
@@ -545,10 +512,12 @@
         loadQuestion();
     }
 
-    // Soru Yükleme
     function loadQuestion() {
         const q = currentPool[currentIndex];
-        document.getElementById('q-text').textContent = `${currentIndex+1}. ${q.q}`;
+        
+        // ÖNEMLİ DEĞİŞİKLİK: .innerHTML kullanarak <br> etiketlerini aktif ettik.
+        document.getElementById('q-text').innerHTML = `${currentIndex+1}. ${q.q}`;
+        
         document.getElementById('q-counter').textContent = `Soru ${currentIndex + 1} / ${currentPool.length}`;
         document.getElementById('q-progress').style.width = `${((currentIndex+1)/currentPool.length)*100}%`;
 
@@ -572,7 +541,7 @@
     }
 
     function handleAnswer(selected, btn) {
-        if(userAnswers[currentIndex]) return; // Zaten cevaplandı
+        if(userAnswers[currentIndex]) return;
 
         const q = currentPool[currentIndex];
         const isCorrect = (selected === q.answer);
@@ -583,18 +552,15 @@
         applyFeedback();
         renderFastAccess();
 
-        // OTOMATİK GEÇİŞ
         const autoNext = document.getElementById('auto-next').checked;
-        
         if(isCorrect && autoNext) {
             const allOpts = document.querySelectorAll('.option-card');
             allOpts.forEach(o => o.style.pointerEvents = 'none');
             
-            // Son soru değilse geç
             if (currentIndex < currentPool.length - 1) {
                 setTimeout(() => {
                     nextQuestion();
-                }, 400); // 0.4 saniye
+                }, 400);
             }
         }
     }
@@ -669,7 +635,6 @@
         
         document.getElementById('res-score').textContent = `%${score}`;
         
-        // Sonuç Çemberi (75 ve üzeri yeşil)
         const circle = document.getElementById('result-circle');
         circle.className = 'score-circle'; 
         if(score >= 75) circle.classList.add('good');
@@ -694,7 +659,6 @@
     }
 
     function restartQuiz() {
-        // Yeniden başlatırken de şıkları tekrar karıştır
         currentPool = currentPool.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
@@ -707,7 +671,6 @@
     function retrySessionMistakes() {
         const wrongs = userAnswers.filter(a => !a.isCorrect).map(a => a.qObj);
         
-        // Hatalı sorularda da şıkları karıştır
         currentPool = wrongs.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
@@ -721,6 +684,3 @@
 </script>
 </body>
 </html>
-
-
-
