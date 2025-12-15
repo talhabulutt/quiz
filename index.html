@@ -176,7 +176,7 @@
             width: 160px; height: 160px; border-radius: 50%;
             background: var(--primary); color: white;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            margin: 0 auto 20px; font-size: 3.5rem; font-weight: 800;
+            margin: 0 auto 20px; font-size: 2.8rem; font-weight: 800; /* Font küçültüldü */
             box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
         }
 
@@ -299,10 +299,13 @@
             <h2 id="res-msg">Sonuç</h2>
             <p style="color: #64748b; margin-bottom: 30px;">Hatalar analiz sistemine kaydedildi.</p>
             
-            <div class="grid-menu" style="max-width: 500px; margin: 0 auto;">
+            <div class="grid-menu" style="max-width: 600px; margin: 0 auto;">
                 <button class="btn" onclick="showPage('page-menu')">🏠 Ana Menü</button>
-                <button class="btn btn-primary" onclick="restartQuiz()">🔄 Tekrar Çöz</button>
+                <button class="btn btn-primary" onclick="restartQuiz()">🔄 Testi Tekrar Çöz</button>
             </div>
+            <button id="btn-retry-session-mistakes" class="btn btn-danger" style="width: 100%; max-width: 600px; margin: 10px auto; display:none;" onclick="retrySessionMistakes()">
+                ⚠️ Sadece Bu Testteki Yanlışları Çöz
+            </button>
         </div>
     </div>
 
@@ -345,7 +348,7 @@
     let currentUser = null;
     let currentPool = [];
     let currentIndex = 0;
-    let userAnswers = [];
+    let userAnswers = []; // O anki session cevapları
 
     // Başlangıç
     window.onload = function() {
@@ -556,7 +559,7 @@
         const q = currentPool[currentIndex];
         const isCorrect = (selected === q.answer);
         
-        userAnswers[currentIndex] = { selected, isCorrect };
+        userAnswers[currentIndex] = { selected, isCorrect, questionObj: q };
 
         // İstatistik Kaydet
         updateQuestionStats(q, isCorrect);
@@ -565,12 +568,17 @@
         applyFeedback();
         updateDots();
 
-        // Otomatik Geçiş
+        // Otomatik Geçiş (Düzeltildi)
+        // Tüm şıklara tıklamayı engelle (Çift tıklama sorunu için)
+        const allOpts = document.querySelectorAll('.option-card');
+        allOpts.forEach(o => o.style.pointerEvents = 'none');
+
         if (document.getElementById('auto-next').checked && isCorrect) {
             setTimeout(() => {
+                // Eğer hala aynı sorudaysak (kullanıcı manuel geçmediyse) geç
                 if (currentIndex < currentPool.length - 1) nextQuestion();
                 else finishQuiz();
-            }, 300);
+            }, 700); // 700ms bekleme
         }
     }
 
@@ -645,11 +653,34 @@
         else if (score >= 70) msg.textContent = "Gayet İyi! 👍";
         else msg.textContent = "Biraz Daha Tekrar Gerekli. 🧐";
 
+        // Yanlışları Bul ve Butonu Göster/Gizle
+        const wrongAnswers = userAnswers.filter(a => !a.isCorrect);
+        const retryBtn = document.getElementById('btn-retry-session-mistakes');
+        
+        if (wrongAnswers.length > 0) {
+            retryBtn.style.display = 'block';
+            retryBtn.textContent = `⚠️ Bu Testteki ${wrongAnswers.length} Yanlışı Çöz`;
+        } else {
+            retryBtn.style.display = 'none';
+        }
+
         showPage('page-result');
     }
 
     function restartQuiz() {
-        // Aynı havuz, yeniden karıştır
+        currentPool.sort(() => Math.random() - 0.5);
+        initQuizUI();
+    }
+
+    // Sadece O Anki Testteki Yanlışları Tekrar Çöz
+    function retrySessionMistakes() {
+        const wrongQuestions = userAnswers
+            .filter(a => !a.isCorrect)
+            .map(a => a.questionObj);
+            
+        if(wrongQuestions.length === 0) return;
+
+        currentPool = wrongQuestions;
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
