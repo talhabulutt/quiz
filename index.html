@@ -315,7 +315,9 @@
         <h2 style="color: #1e293b; margin-bottom: 20px;">Ana Menü</h2>
 
         <div style="text-align: center; margin-bottom: 20px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 10px; border-radius: 8px;">
-        🏆 Toplam Çözülen Soru: <span id="total-solved-display" style="color: var(--primary); font-size: 1.2rem;">0</span>
+        🏆 Toplam: <span id="total-solved-display" style="color: var(--primary); font-size: 1.1rem; margin-right:5px;">0</span>
+        <span style="color:#cbd5e1">|</span>
+        ✅ Başarı: <span id="success-rate-display" style="color: var(--success); font-size: 1.1rem; margin-left:5px;">%0</span>
         </div>
         
         <div class="grid-menu">
@@ -1077,27 +1079,37 @@
         }
 
         if(id === 'page-menu') {
-            renderMistakeMenu(); // Bu satır zaten vardı.
+            renderMistakeMenu(); 
             
-            // --- BURAYI EKLEYİN: TOPLAM SAYIYI HESAPLA VE GÖSTER ---
+            // --- İSTATİSTİK HESAPLAMA (YENİ) ---
             let db = getDB();
-            let total = 0;
+            let totalAttempts = 0;
+            let totalCorrect = 0;
 
-            if (db[currentUser]) {
-                // Eğer kullanıcı var ama 'totalSolved' verisi henüz yoksa (Eski kayıtlar için düzeltme)
-                if (typeof db[currentUser].totalSolved === 'undefined') {
-                    let calculatedTotal = 0;
-                    // Geçmişte çözülen tüm soruları topla
-                    Object.values(db[currentUser].stats).forEach(s => calculatedTotal += s.total);
-                    db[currentUser].totalSolved = calculatedTotal;
-                    saveDB(db); // Düzeltmeyi kaydet
-                }
-                total = db[currentUser].totalSolved;
+            if (db[currentUser] && db[currentUser].stats) {
+                // Kayıtlı tüm soruları tek tek kontrol et
+                Object.values(db[currentUser].stats).forEach(stat => {
+                    totalAttempts += stat.total;     // O soru kaç kere çözüldü
+                    totalCorrect += stat.correct;    // Kaç kere doğru bilindi
+                });
+                
+                // Veritabanındaki sayaçla senkronize et (garanti olsun)
+                db[currentUser].totalSolved = totalAttempts;
+                saveDB(db);
             }
             
-            // HTML'deki yere yazdır
+            // Başarı Yüzdesini Hesapla
+            let successRate = 0;
+            if (totalAttempts > 0) {
+                successRate = Math.round((totalCorrect / totalAttempts) * 100);
+            }
+
+            // Ekrana Yazdır
             const totalEl = document.getElementById('total-solved-display');
-            if(totalEl) totalEl.textContent = total;
+            const rateEl = document.getElementById('success-rate-display');
+            
+            if(totalEl) totalEl.textContent = totalAttempts;
+            if(rateEl) rateEl.textContent = `%${successRate}`;
             // -------------------------------------------------------
         }
     }
@@ -1458,6 +1470,7 @@
 </script>
 </body>
 </html>
+
 
 
 
